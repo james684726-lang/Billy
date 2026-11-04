@@ -1,34 +1,56 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { Phone, Mail, Clock, Lock, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const socialLinks = [
+interface SocialLink {
+  id: string;
+  svg: React.ReactNode;
+  alt: string;
+  url: string;
+}
+
+const socialLinks: SocialLink[] = [
   {
     id: "facebook",
-    src: "https://api.iconify.design/uim:facebook-f.svg?color=%23004D22",
     alt: "Facebook",
     url: "https://facebook.com/BillyWatkinsMortgage",
+    svg: (
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 320 512" className="w-[18px] h-[18px]">
+        <path d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z" />
+      </svg>
+    ),
   },
   {
     id: "instagram",
-    src: "https://api.iconify.design/uim:instagram.svg?color=%23004D22",
     alt: "Instagram",
     url: "https://www.instagram.com/billy.watkins_home.loans/",
+    svg: (
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 448 512" className="w-[18px] h-[18px]">
+        <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
+      </svg>
+    ),
   },
   {
     id: "linkedin",
-    src: "https://api.iconify.design/uim:linkedin-alt.svg?color=%23004D22",
     alt: "LinkedIn",
     url: "https://linkedin.com/in/BillyWatkinsMortgage",
+    svg: (
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 448 512" className="w-[18px] h-[18px]">
+        <path d="M100.3 448H7.4V148.9h92.9zM53.8 108.1C24.1 108.1 0 83.5 0 53.8a53.8 53.8 0 0 1 107.6 0c0 29.7-24.1 54.3-53.8 54.3zM447.9 448h-92.7V302.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7V448h-92.8V148.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V448z" />
+      </svg>
+    ),
   },
   {
     id: "zillow",
-    src: "https://api.iconify.design/simple-icons:zillow.svg?color=%23004D22",
     alt: "Zillow",
     url: "https://zillow.com/lender-profile/BillyWatkinsMortgage",
+    svg: (
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-[18px] h-[18px]">
+        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm6.29 6.29l-7.38 9.75h7.05v2.39H6.29l7.38-9.75H7.05V6.29h11.24z" />
+      </svg>
+    ),
   },
 ];
 
@@ -247,17 +269,10 @@ This inquiry was sent from the Billy Watkins Mortgage website.`,
                     href={icon.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full border border-gray-400 bg-white flex items-center justify-center hover:bg-[#04205D] transition group"
+                    className="w-10 h-10 rounded-full border border-gray-400 bg-white flex items-center justify-center text-[#004D22] hover:bg-[#04205D] hover:text-white transition"
                     aria-label={icon.alt}
                   >
-                    <Image
-                      src={icon.src}
-                      alt={icon.alt}
-                      width={18}
-                      height={18}
-                      className="w-4 h-4 group-hover:brightness-0 group-hover:invert transition-all"
-                      unoptimized
-                    />
+                    {icon.svg}
                   </a>
                 ))}
               </div>
