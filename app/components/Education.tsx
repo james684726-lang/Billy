@@ -50,13 +50,6 @@ const loanProducts: LoanProduct[] = [
     icon: <Shield className="w-6 h-6" />,
   },
   {
-    id: "/loan-programs?program=va",
-    title: "VA Home Loans",
-    description:
-      "Exclusive zero-down mortgage benefits for veterans and service members.",
-    icon: <Star className="w-6 h-6" />,
-  },
-  {
     id: "/loan-programs?program=conventional",
     title: "Conventional Loans",
     description:

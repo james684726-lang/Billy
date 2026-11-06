@@ -111,11 +111,11 @@ export default function Footer() {
                 alt: "Instagram",
                 href: "https://www.instagram.com/billy.watkins_home.loans/",
               },
-              {
-                src: "https://cdn.prod.website-files.com/65d509901b89bb3fd2a62af7/65d509901b89bb3fd2a62ca8_mdi_youtube.svg",
-                alt: "YouTube",
-                href: "https://share.google/58EeohLOQ10kKQ6Y2",
-              },
+              // {
+              //   src: "https://cdn.prod.website-files.com/65d509901b89bb3fd2a62af7/65d509901b89bb3fd2a62ca8_mdi_youtube.svg",
+              //   alt: "YouTube",
+              //   href: "https://share.google/58EeohLOQ10kKQ6Y2",
+              // },
             ].map(({ src, alt, href }) => (
               <Link
                 key={alt}
